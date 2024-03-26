@@ -22,6 +22,7 @@ Obs: Your function must not have memory leaks. Moulinette will test that. */
 #include <unistd.h> // write
 #include <stdarg.h> // va_start, va_end, va_arg
 #include <stdlib.h> // malloc, free
+#define HEX "0123456789abcdef"
 
 
 static int ft_strlen(char *s)
@@ -80,6 +81,7 @@ int ft_printf(const char *str, ...)
 	va_list ap;
 	int d;
 	char *s;
+	unsigned int ui = 0;
 	unsigned int count = 0;
 
 	if(!str)
@@ -97,20 +99,22 @@ int ft_printf(const char *str, ...)
 					break;
 				case 's':                       /* string */
 					s = va_arg(ap, char *);
-					write(1, s, ft_strlen(s));
+					count += write(1, s, ft_strlen(s));
 					break;
 				case 'd':                       /* int */
 					d = va_arg(ap, int);
 					s = ft_itoa(d);
-					write(1, s, ft_strlen(s));
+					count += write(1, s, ft_strlen(s));
 					if (d != -2147483648)
 						free (s);
 					break;
 				case 'x':                       /* hexidecimal */
-				// 	/* Note: char is promoted to int. */
-				// 	c = va_arg(ap, int);
-				// 	printf("char %c\n", c);
-				// 	break;
+					ui = va_arg(ap, unsigned int);
+					while (ui)
+					{
+						write(1, &HEX[ui % 16], 1);
+						ui = ui / 16;
+					}
 				default:
 				;
 			}
