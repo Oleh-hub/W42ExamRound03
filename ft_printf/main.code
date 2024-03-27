@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <limits.h> // INT_MAX
+
+int ft_printf(const char *str, ...);
+
+int main()
+{
+    char *s = NULL;
+    // int i = -1;
+    int count = 0;
+
+    // count = printf("%x\n", 258);
+    // printf("count = %i\n", count);
+    // count = ft_printf("%x\n", 258);
+    // printf("count = %i\n", count);
+    // count = printf("%x\n", i);
+    // printf("count = %i\n", count);
+    // count = ft_printf("%x\n", i);
+    // printf("count = %i\n", count);
+
+    // count = printf("%s\n", s);
+    // printf("count = %i\n", count);
+    // count = ft_printf("%s\n", s);
+    // printf("count = %i\n", count);
+
+    // count = printf("%x\n", 0);
+    // printf("count = %i\n", count);
+    // count = ft_printf("%x\n", 0);
+    // printf("count = %i\n", count);
+
+    printf("%x\n", (int)2147483647);
+    ft_printf("%x\n", (int)2147483647);
+	printf("%x\n", (int)2147483648);
+	ft_printf("%x\n", (int)2147483648);
+	printf("%x\n", (int)-2147483648);
+	ft_printf("%x\n", (int)-2147483648);
+	printf("%x\n", (int)-2147483649);
+	ft_printf("%x\n", (int)-2147483649);
+	printf("%x\n", (int)0xFFFFFFFF);
+	ft_printf("%x\n", (int)0xFFFFFFFF);
+}

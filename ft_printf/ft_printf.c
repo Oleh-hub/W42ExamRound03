@@ -80,6 +80,19 @@ char *ft_itoa(int i)
 	return (a);
 }
 
+int write_x_of_ui(unsigned int ui, int reset)
+{
+	static int i = 0;
+	if (reset)
+		i = 0;
+	if (!ui)
+		return (i);
+	write_x_of_ui(ui / 16, 0);
+	i++;
+	write(1, &HEX[ui % 16], 1);
+	return (i);
+}
+
 int ft_printf(const char *str, ...)
 {
 	va_list ap;
@@ -118,19 +131,7 @@ int ft_printf(const char *str, ...)
 					break;
 				case 'x':                       /* hexidecimal */
 					ui = va_arg(ap, unsigned int);
-					len = ft_ilen(ui);
-					s = (char *) malloc(len + 1);
-					s[len] = '\0';
-					if (ui == 0)
-						s[len] = '0';
-					while (ui)
-					{
-						len--;
-						s[len] = HEX[ui % 16];
-						ui = ui / 16;
-					}
-					count += write (1, s, ft_strlen(s));
-					free (s);
+					count += write_x_of_ui(ui, 1);
 				default:
 				;
 			}

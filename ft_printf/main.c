@@ -1,11 +1,14 @@
+// JCluzet's code from 42_EXAM
+// pefercly full check of ft_printf for %d, %c, %x - roi
+
 #include <stdio.h>
 #include <stdarg.h>
 
 int
 	ft_printf(char const *format, ...);
 
-// #ifndef REAL
-#ifndef REAL
+// #ifndef REAL // uncomment for ft_prntf check test - roi
+#ifdef REAL
 # define F	r += ft_printf
 #else
 # define F	r += printf
