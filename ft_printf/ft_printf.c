@@ -104,7 +104,10 @@ int ft_printf(const char *str, ...)
 					break;
 				case 's':                       /* string */
 					s = va_arg(ap, char *);
-					count += write(1, s, ft_strlen(s));
+					if (!s)
+						count += write(1, "(null)", 6);
+					else
+						count += write(1, s, ft_strlen(s));
 					break;
 				case 'd':                       /* int */
 					d = va_arg(ap, int);
