@@ -43,6 +43,8 @@ static int ft_ilen(int number)
 		i++;
 		number = -number;
 	}
+	if (number == 0 )
+		i = 1;
 	while (number >= 1)
 	{
 		number = number / 10;
@@ -67,6 +69,8 @@ char *ft_itoa(int i)
 		a[0] = '-';
 		i = -i;
 	}
+	else if (i == 0)
+		a[0] = '0';
 	while (i)
 	{
 		len--;
@@ -83,6 +87,7 @@ int ft_printf(const char *str, ...)
 	char *s;
 	unsigned int ui = 0;
 	unsigned int count = 0;
+	int len = 0;
 
 	if(!str)
 		return (0);
@@ -110,11 +115,19 @@ int ft_printf(const char *str, ...)
 					break;
 				case 'x':                       /* hexidecimal */
 					ui = va_arg(ap, unsigned int);
+					len = ft_ilen(ui);
+					s = (char *) malloc(len + 1);
+					s[len] = '\0';
+					if (ui == 0)
+						s[len] = '0';
 					while (ui)
 					{
-						write(1, &HEX[ui % 16], 1);
+						len--;
+						s[len] = HEX[ui % 16];
 						ui = ui / 16;
 					}
+					count += write (1, s, ft_strlen(s));
+					free (s);
 				default:
 				;
 			}
