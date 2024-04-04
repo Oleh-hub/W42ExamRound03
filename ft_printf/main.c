@@ -7,7 +7,8 @@
 int
 	ft_printf(char const *format, ...);
 
-// #ifndef REAL // uncomment for ft_prntf check test - roi
+// #ifndef RE6w2`5 // uncomment for ft_prntf check test - roi
+# define REAL
 #ifdef REAL
 # define F	r += ft_printf
 #else
